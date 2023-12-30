@@ -1,8 +1,9 @@
 services:
   robot:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: caochao/mtare-open-source:latest
     privileged: true
     stdin_open: true
     tty: true
@@ -15,7 +16,7 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [gpu]
+              capabilities: [ gpu ]
     # Environment variables passed to the container
     environment:
       - "DISPLAY"
