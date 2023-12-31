@@ -3,7 +3,7 @@ services:
     extends:
       file: common.yml
       service: robot
-    container_name: mtare_robot1
+    container_name: robot1
     networks:
       mymacvlan:
         ipv4_address: 10.0.2.1
@@ -11,7 +11,7 @@ services:
     extends:
       file: common.yml
       service: robot
-    container_name: mtare_robot2 
+    container_name: robot2 
     networks:
       mymacvlan:
         ipv4_address: 10.0.2.2 
@@ -19,7 +19,7 @@ services:
     extends:
       file: common.yml
       service: robot
-    container_name: mtare_robot3 
+    container_name: robot3 
     networks:
       mymacvlan:
         ipv4_address: 10.0.2.3 
