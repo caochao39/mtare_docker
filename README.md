@@ -1,5 +1,4 @@
 # M-TARE Quick Start 
-Chao Cao Dec 16, 2021
 
 ## Install Dependencies
 Install terminal multiplexers
