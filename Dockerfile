@@ -17,7 +17,5 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Setup work directory
 RUN mkdir -p /home/docker-user/mtare
-# RUN mkdir -p /home/docker-user/mtare/autonomous_exploration_development_environment
-#COPY /home/ccao1/Work/ros_ws/autonomous_exploration_development_environment/src/ home/docker-user/mtare/autonomous_exploration_development_environment/src
 
 CMD ["bash"]
