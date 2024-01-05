@@ -89,12 +89,12 @@ printf -v robot_num "%02d" $ROBOT_NUM
 
 # Construct the final string
 export TEST_ID="${first_char}${second_char}${robot_num}${COMMS_RANGE}"
-
-# Output the result
 echo ">>> setting test id: $TEST_ID"
 
+# Rename tmux session and docker compose service
 tmux_session_name="launch_robot${ROBOT_ID}"
-
+docker_compose_service_name="robot${ROBOT_ID}"
 sed -i "s/^session_name:.*/session_name: $tmux_session_name/" "launch_robot.yml"
+sed -i "s/robot.*:/$docker_compose_service_name:/" "docker-compose-launch-robot.yml"
 
 tmuxp load launch_robot.yml
