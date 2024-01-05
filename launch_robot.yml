@@ -1,0 +1,40 @@
+session_name: launch_robot1
+
+environment:
+  ROBOT_ID: ${ROBOT_ID}
+  CONTAINER_NAME: ${CONTAINER_NAME} 
+  ENVIRONMENT: ${ENVIRONMENT}
+  ROBOT_NUM: ${ROBOT_NUM}
+  TEST_ID: ${TEST_ID}
+  ROOT_FOLDER: /home/docker-user/mtare
+  DISPLAY_INDEX: ${DISPLAY}
+
+suppress_history: true
+
+before_script: docker compose -f ./docker-compose-launch-robot.yml up -d
+
+windows:
+  - window_name: ROS_CORE
+    focus: false
+    layout: tiled
+    panes:
+      - shell_command:
+        - docker exec -it ${CONTAINER_NAME} bash -c "source /opt/ros/noetic/setup.bash && roscore"
+  - window_name: ROS_BRIDGE
+    focus: false
+    layout: tiled
+    panes:
+      - shell_command:
+        - docker exec -it ${CONTAINER_NAME} bash -c "source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner param.launch && source /opt/ros/galactic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && source $ROOT_FOLDER/colcon_ws/install/local_setup.bash && source $ROOT_FOLDER/ros1_bridge/install/local_setup.bash && ros2 run ros1_bridge parameter_bridge"
+  - window_name: DEV_ENV
+    focus: false
+    layout: tiled
+    panes:
+      - shell_command:
+        - docker exec -it ${CONTAINER_NAME} bash -c "source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/autonomous_exploration_development_environment/devel/setup.bash && roslaunch --wait vehicle_simulator system_${ENVIRONMENT}.launch robot_id:=${ROBOT_ID}"
+  - window_name: TARE
+    focus: true
+    layout: tiled
+    panes:
+      - shell_command:
+        - docker exec -it ${CONTAINER_NAME} bash -c "export DISPLAY=${DISPLAY_INDEX} && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${ENVIRONMENT}.launch robot_id:=${ROBOT_ID} robot_num:=${ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"

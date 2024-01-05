@@ -1,8 +1,5 @@
 services:
-  robot:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+  robot_base:
     image: caochao/mtare-open-source:latest
     privileged: true
     stdin_open: true

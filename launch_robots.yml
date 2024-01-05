@@ -11,6 +11,7 @@ environment:
   TOTAL_ROBOT_NUM: "3" 
   TEST_ID: "000330"
   ROOT_FOLDER: /home/docker-user/mtare
+  DISPLAY_INDEX: ${DISPLAY}
 
 suppress_history: true
 
@@ -52,8 +53,8 @@ windows:
     layout: tiled
     panes:
       - shell_command:
-        - docker exec -it ${ROBOT1_CONTAINER_NAME} bash -c "export DISPLAY=:1 && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${SCENARIO}.launch robot_id:=${ROBOT1_ID} robot_num:=${TOTAL_ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"
+        - docker exec -it ${ROBOT1_CONTAINER_NAME} bash -c "export DISPLAY=${DISPLAY_INDEX} && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${SCENARIO}.launch robot_id:=${ROBOT1_ID} robot_num:=${TOTAL_ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"
       - shell_command:
-        - docker exec -it ${ROBOT2_CONTAINER_NAME} bash -c "export DISPLAY=:1 && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${SCENARIO}.launch robot_id:=${ROBOT2_ID} robot_num:=${TOTAL_ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"
+        - docker exec -it ${ROBOT2_CONTAINER_NAME} bash -c "export DISPLAY=${DISPLAY_INDEX} && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${SCENARIO}.launch robot_id:=${ROBOT2_ID} robot_num:=${TOTAL_ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"
       - shell_command:
-        - docker exec -it ${ROBOT3_CONTAINER_NAME} bash -c "export DISPLAY=:1 && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${SCENARIO}.launch robot_id:=${ROBOT3_ID} robot_num:=${TOTAL_ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"
+        - docker exec -it ${ROBOT3_CONTAINER_NAME} bash -c "export DISPLAY=${DISPLAY_INDEX} && source /opt/ros/noetic/setup.bash && source $ROOT_FOLDER/tare_system/devel/setup.bash && roslaunch --wait tare_planner explore_${SCENARIO}.launch robot_id:=${ROBOT3_ID} robot_num:=${TOTAL_ROBOT_NUM} test_id:=${TEST_ID} rviz:=true"

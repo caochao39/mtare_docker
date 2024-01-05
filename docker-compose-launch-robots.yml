@@ -11,18 +11,18 @@ services:
     extends:
       file: common.yml
       service: robot
-    container_name: robot2 
+    container_name: robot2
     networks:
       mymacvlan:
-        ipv4_address: 10.0.2.2 
+        ipv4_address: 10.0.2.2
   robot3:
     extends:
       file: common.yml
       service: robot
-    container_name: robot3 
+    container_name: robot3
     networks:
       mymacvlan:
-        ipv4_address: 10.0.2.3 
+        ipv4_address: 10.0.2.3
 networks:
   mymacvlan:
     name: my-macvlan-net
