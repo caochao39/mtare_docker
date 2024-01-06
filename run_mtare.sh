@@ -7,9 +7,10 @@ disp_usage() {
   echo "  - <comms_range>: Communication range in meters, two robots further than this range cannot communicate"
   echo "  - <robot_num>: Total number of robots"
   echo "  - <robot_id>: Robot id, ranging from 0 to robot_num - 1"
+  echo "  - <network_interface>: Name of the network interface to use, e.g. eth0"
 }
 
-if [ "$#" -ne 4 ] || [ "$1" != "tunnel" ] && [ "$1" != "garage" ] && [ "$1" != "forest" ] && [ "$1" != "indoor" ] && [ "$1" != "campus" ]; then
+if [ "$#" -ne 5 ] || [ "$1" != "tunnel" ] && [ "$1" != "garage" ] && [ "$1" != "forest" ] && [ "$1" != "indoor" ] && [ "$1" != "campus" ]; then
   disp_usage
   exit 22  
 # comms_range should be greater than zero
@@ -30,21 +31,16 @@ export ENVIRONMENT=$1
 export COMMS_RANGE=$2
 export ROBOT_NUM=$3
 export ROBOT_ID=$4
+export NETWORK_INTERFACE=$5
+export CONTAINER_NAME="robot${ROBOT_ID}"
+export CONTAINER_IP="10.0.2.${ROBOT_ID}"
 
 echo "Running with " 
 echo ">>> environment: " $ENVIRONMENT
 echo ">>> communication range: " $COMMS_RANGE
 echo ">>> total robot number: " $ROBOT_NUM
 echo ">>> robot id: " $ROBOT_ID
-
-# get the name of the ethernet interface
-ethernet_interface=$(nmcli -t -f TYPE,DEVICE connection show --active | grep 802-3-ethernet | cut -d: -f2)
-export NETWORK_INTERFACE=$ethernet_interface
-echo ">>> using ethernet interface: " $NETWORK_INTERFACE
-
-export CONTAINER_NAME="robot${ROBOT_ID}"
-export CONTAINER_IP="10.0.2.${ROBOT_ID}"
-
+echo ">>> using network interface: " $NETWORK_INTERFACE
 echo ">>> setting container name: " $CONTAINER_NAME
 echo ">>> setting container ip: " $CONTAINER_IP
 
