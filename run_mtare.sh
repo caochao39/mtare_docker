@@ -2,7 +2,7 @@
 
 disp_usage() {
   # display script usage
-  echo "Usage: run.sh <envrionment> <comms_range> <robot_num> <robot_id>"
+  echo "Usage: run_mtare.sh <envrionment> <comms_range> <robot_num> <robot_id>"
   echo "  - <envrionment>: The environment to explore: tunnel, garage, campus, indoor, forest"
   echo "  - <comms_range>: Communication range in meters, two robots further than this range cannot communicate"
   echo "  - <robot_num>: Total number of robots"

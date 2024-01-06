@@ -1,4 +1,4 @@
-session_name: launch_robot1
+session_name: launch_robot0
 
 environment:
   ROBOT_ID: ${ROBOT_ID}

@@ -1,5 +1,5 @@
 services:
-  robot1:
+  robot0:
     extends:
       file: common.yml
       service: robot_base
