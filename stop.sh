@@ -40,8 +40,6 @@ if [ "$stop_all" -eq 1 ]; then
     tmux kill-session -t $session 
   done
 
-  
-
   # kill all docker containers
   echo "stopping and removing docker containers"
   docker ps -aq --filter "name=robot*" | grep -q . && docker stop $(docker ps -aq --filter name="robot*") && docker rm $(docker ps -aq --filter name="robot*")

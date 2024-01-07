@@ -48,7 +48,7 @@ echo ">>> setting container ip: " $CONTAINER_IP
 # the second character is 0 for "tunnel", 1 for "garage", 2 for "campus", 3 for "indoor" and 4 for "forst". 
 # The third and forth character is the $ROBOT_NUM. 
 # The rest characters are the $COMMS_RANGE
-# e.g. 1002030 means the environment is "tunnel", the total robot number is 2, the communication range is 30 meters
+# e.g. 100230 means the environment is "tunnel", the total robot number is 2, the communication range is 30 meters
 
 # First character
 if [ "$COMMS_RANGE" -lt 1000 ]; then
