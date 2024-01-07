@@ -109,10 +109,10 @@ sed -i "s/robot.*:/$docker_compose_service_name:/" "$docker_compose_filename"
 # If not use Nvidia GPU, remove the Nvidia GPU related lines in docker compose file
 if [ "$use_nvidia_gpu" -eq 0 ]; then
     echo "Comment out the gpu driver section in $docker_compose_filename"
-    sed -i '28,34 s/^/# /' $docker_compose_filename
+    sed -i '25,31 s/^/# /' $docker_compose_filename
 else
     echo "Uncomment the gpu driver section in $docker_compose_filename"
-    sed -i '28,34 s/# //' $docker_compose_filename
+    sed -i '25,31 s/# //' $docker_compose_filename
 fi
 
 tmuxp load launch_robot.yml
