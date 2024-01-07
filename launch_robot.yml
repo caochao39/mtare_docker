@@ -12,7 +12,7 @@ environment:
 
 suppress_history: true
 
-before_script: docker compose -f ./${DOCKER_COMPOSE_FILE} up -d
+before_script: docker compose -f ./docker-compose-network.yml -f ./docker-compose-launch-robot.yml up -d
 
 windows:
   - window_name: ROS_CORE

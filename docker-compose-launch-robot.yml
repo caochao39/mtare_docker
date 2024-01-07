@@ -1,24 +1,31 @@
 services:
   robot0:
-    extends:
-      file: common.yml
-      service: robot_base
+    image: caochao/mtare-open-source:latest
+    privileged: true
+    stdin_open: true
+    tty: true
+    working_dir: /home/docker-user
     container_name: ${CONTAINER_NAME:?err}
+    # Environment variables passed to the container
+    environment:
+      - "DISPLAY"
+      - "QT_X11_NO_MITSHM=1"
+      - XAUTHORITY=/tmp/.docker.xauth
+    # This mounts the host directories into the container 
+    volumes:
+      # This mounts the X11 socket into the container so that GUIs can be displayed
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime:ro
+      - /dev/input:/dev/input
+      - /dev/bus/usb:/dev/bus/usb:rw
     networks:
       mymacvlan:
         ipv4_address: ${CONTAINER_IP:?err}
-networks:
-  mymacvlan:
-    name: my-macvlan-net
-    #####
-    # For running multiple robots across different computers
-    driver: macvlan
-    # For running multiple robots on the same computer
-    # driver: bridge
-    #####
-    driver_opts:
-      parent: ${NETWORK_INTERFACE:?err}
-    ipam:
-      config:
-        - subnet: "10.0.1.0/16"
-          gateway: "10.0.1.1"
+    # Enabling Nvidia GPUs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
