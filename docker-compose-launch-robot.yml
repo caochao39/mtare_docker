@@ -18,7 +18,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /dev/input:/dev/input
       - /dev/bus/usb:/dev/bus/usb:rw
-      - /home/$USER:/home/$USER:rw
     networks:
       mymacvlan:
         ipv4_address: ${CONTAINER_IP:?err}
