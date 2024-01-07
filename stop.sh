@@ -71,3 +71,7 @@ else
   echo "stopping and removing docker container"
   docker ps -aq --filter "name=robot$robot_id" | grep -q . && docker stop $(docker ps -aq --filter name="robot$robot_id") && docker rm $(docker ps -aq --filter name="robot$robot_id")
 fi
+
+# Remove the network
+echo "Removing my-macvlan-net"
+docker network rm my-macvlan-net
