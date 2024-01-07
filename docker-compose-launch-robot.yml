@@ -1,5 +1,5 @@
 services:
-  robot0:
+  robot1:
     extends:
       file: common.yml
       service: robot_base
@@ -10,7 +10,12 @@ services:
 networks:
   mymacvlan:
     name: my-macvlan-net
-    driver: macvlan
+    #####
+    # For running multiple robots across different computers
+    # driver: macvlan
+    # For running multiple robots on the same computer
+    driver: bridge
+    #####
     driver_opts:
       parent: ${NETWORK_INTERFACE:?err}
     ipam:
