@@ -87,10 +87,21 @@ printf -v robot_num "%02d" $ROBOT_NUM
 export TEST_ID="${first_char}${second_char}${robot_num}${COMMS_RANGE}"
 echo ">>> setting test id: $TEST_ID"
 
+# Check if Nvidia GPU is available
+# Check if the NVIDIA driver is installed
+docker_compose_filename="docker-compose-launch-robot.yml"
+if ! command -v nvidia-smi &> /dev/null; then
+    echo "NVIDIA driver not detected."
+    docker_compose_filename="docker-compose-launch-robot-cpu.yml"
+fi
+
+export DOCKER_COMPOSE_FILE=$docker_compose_filename
+echo ">>> using docker compose file: $DOCKER_COMPOSE_FILE"
+
 # Rename tmux session and docker compose service
 tmux_session_name="launch_robot${ROBOT_ID}"
 docker_compose_service_name="robot${ROBOT_ID}"
 sed -i "s/^session_name:.*/session_name: $tmux_session_name/" "launch_robot.yml"
-sed -i "s/robot.*:/$docker_compose_service_name:/" "docker-compose-launch-robot.yml"
+sed -i "s/robot.*:/$docker_compose_service_name:/" "$docker_compose_filename"
 
 tmuxp load launch_robot.yml

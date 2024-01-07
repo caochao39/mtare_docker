@@ -1,7 +1,7 @@
 services:
   robot0:
     extends:
-      file: common.yml
+      file: common-cpu.yml
       service: robot_base
     container_name: ${CONTAINER_NAME:?err}
     networks:

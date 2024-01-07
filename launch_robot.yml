@@ -8,10 +8,11 @@ environment:
   TEST_ID: ${TEST_ID}
   ROOT_FOLDER: /home/docker-user/mtare
   DISPLAY_INDEX: ${DISPLAY}
+  DOCKER_COMPOSE_FILE: ${DOCKER_COMPOSE_FILE}
 
 suppress_history: true
 
-before_script: docker compose -f ./docker-compose-launch-robot.yml up -d
+before_script: docker compose -f ./${DOCKER_COMPOSE_FILE} up -d
 
 windows:
   - window_name: ROS_CORE
