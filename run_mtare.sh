@@ -87,7 +87,6 @@ printf -v robot_num "%02d" $ROBOT_NUM
 export TEST_ID="${first_char}${second_char}${robot_num}${COMMS_RANGE}"
 echo ">>> setting test id: $TEST_ID"
 
-# Check if Nvidia GPU is available
 # Check if the NVIDIA driver is installed
 use_nvidia_gpu=1
 if ! command -v nvidia-smi &> /dev/null; then
